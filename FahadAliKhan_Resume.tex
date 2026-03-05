@@ -1,0 +1,109 @@
+% !TEX program = lualatex
+\documentclass[a4paper,11pt]{article}
+\usepackage{fontspec}
+\usepackage{url,parskip,color,graphicx,xcolor,geometry,tabularx,enumitem,supertabular,titlesec,multicol,multirow}
+\geometry{scale=0.9}
+\titleformat{\section}{\Large\scshape\raggedright}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{4pt}{3pt}
+\usepackage[unicode,draft=false]{hyperref}
+\definecolor{linkcolour}{rgb}{0,0.2,0.6}
+\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour,linkcolor=linkcolour}
+\usepackage{fontawesome5}
+
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+
+\newenvironment{joblong}[2]
+  {\begin{tabularx}{\linewidth}{@{}l X r@{}}\textbf{#1} & \hfill & #2 \\[-2pt]\end{tabularx}
+   \begin{minipage}[t]{\linewidth}\begin{itemize}[nosep,leftmargin=1em,itemsep=1pt,label=--]}
+  {\end{itemize}\end{minipage}}
+
+\setlength{\parskip}{2pt}
+
+\begin{document}
+\pagestyle{empty}
+
+%----------------------------------------------------------------------------------------
+% TITLE
+%----------------------------------------------------------------------------------------
+\begin{tabularx}{\linewidth}{@{}C@{}}
+\Huge{Fahad Ali Khan} \\[4pt]
+{\small
+\href{https://github.com/Fahad-Ali-Khan-ca}{\raisebox{-0.05\height}\faGithub\ Fahad-Ali-Khan-ca} \;|\;
+\href{https://www.linkedin.com/in/fahad-ali-khan-59a182228/}{\raisebox{-0.05\height}\faLinkedin\ Fahad Ali Khan} \;|\;
+\href{mailto:Fahad_Ali_Khan.ca@outlook.com}{\raisebox{-0.05\height}\faEnvelope\ \texttt{Fahad\_Ali\_Khan.ca@outlook.com}} \;|\;
+\raisebox{-0.05\height}\faMobile\ +1-437-882-8481
+}
+\end{tabularx}
+
+%----------------------------------------------------------------------------------------
+% SUMMARY
+%----------------------------------------------------------------------------------------
+\section*{Summary}
+Software Engineer with experience across \textbf{software development}, \textbf{automation}, and \textbf{testing}. Built API-driven applications and internal tools using \textbf{Python}, \textbf{TypeScript/JavaScript}, \textbf{Node.js}, and \textbf{C\#}, with hands-on experience in CI/CD, debugging, and technical documentation. Strong problem-solver who learns quickly, collaborates well in Agile teams, and is ready to ramp rapidly into client-facing work across software engineering, cloud, or quality engineering tracks.
+
+%----------------------------------------------------------------------------------------
+% EDUCATION
+%----------------------------------------------------------------------------------------
+\section*{Education}
+\textbf{Bachelor of Engineering (Software Engineering)} \hfill Aug 2025 \\
+Seneca Polytechnic — North York, ON \hfill \textit{President’s Honour List (Fall 2023)}
+
+%----------------------------------------------------------------------------------------
+% SKILLS
+%----------------------------------------------------------------------------------------
+\section*{Technical Skills}
+\textbf{Programming:} Python, TypeScript/JavaScript, C\#, C++ (C++20), Java fundamentals, SQL \\
+\textbf{Web \& Backend:} React 18, Next.js, Node.js/Express, REST APIs, JSON, authentication \& role-based access \\
+\textbf{Testing \& QA:} PyTest, JUnit, manual/regression testing, validation checks, test case design \\
+\textbf{Cloud \& DevOps:} AWS (EC2, Lambda, RDS, S3), Git, GitHub Actions CI/CD, Docker, Kubernetes concepts \\
+\textbf{Ways of Working:} Agile/Scrum, Jira, Confluence, documentation, cross-functional communication
+
+%----------------------------------------------------------------------------------------
+% EXPERIENCE
+%----------------------------------------------------------------------------------------
+\section{Work Experience}
+
+\begin{joblong}{Software Developer Intern — Project Human City}{Jan 2025 -- Apr 2025}
+\item Built and deployed \textbf{REST APIs} using \textbf{Node.js/Express} on \textbf{AWS (EC2, Lambda, RDS)} to support business workflows and internal tools.
+\item Automated build, test, and deployment steps through \textbf{GitHub Actions CI/CD}, reducing deployment time by 40\% and improving release consistency.
+\item Developed user-facing dashboards and workflow tools with \textbf{React + TypeScript}, improving usability and responsiveness.
+\item Collaborated in Agile sprints with cross-functional stakeholders to deliver tested, maintainable changes from requirements through release.
+\end{joblong}
+
+\vspace{3pt}
+
+\begin{joblong}{Software Engineer Intern — Digm Labs}{May 2024 -- Aug 2024}
+\item Built backend services and integrations in \textbf{Python (Django REST)} and \textbf{Node.js}, supporting reliable API-driven workflows.
+\item Improved software quality through automated testing (\textbf{PyTest/JUnit}), achieving 90\% code coverage for critical paths.
+\item Supported production debugging using \textbf{CloudWatch + Splunk}, analyzing failures and documenting fixes to reduce repeat incidents.
+\item Contributed to clear engineering documentation and repeatable validation steps that improved maintainability and handoffs.
+\end{joblong}
+
+\vspace{3pt}
+
+\begin{joblong}{Software Developer Intern — Diginautical}{Sep 2023 -- Dec 2023}
+\item Built internal automation and validation tooling in \textbf{C\#} and \textbf{NI TestStand}, reducing manual effort and improving repeatability.
+\item Debugged execution issues across tooling workflows, implemented targeted fixes, and improved diagnostics for faster issue resolution.
+\item Created and updated technical documentation and work instructions to support consistent execution and smoother onboarding.
+\end{joblong}
+
+\vspace{-2pt}
+
+%----------------------------------------------------------------------------------------
+% PROJECTS
+%----------------------------------------------------------------------------------------
+\section*{Projects}
+
+\begin{tabularx}{\linewidth}{@{}l r@{}}
+\textbf{AeroGuard Customs — AI CV + LLM Workflow Platform (React/Node)} & \hfill \href{https://github.com/InderParmar/aeroguard-customs}{\faGithub} \\[2pt]
+\multicolumn{2}{@{}X@{}}{Built a workflow-focused platform displaying real-time computer vision outputs and LLM-generated summaries. Emphasized reliable API integration, clear user experience, and maintainable frontend/backend collaboration.}\\
+\end{tabularx}
+
+\vspace{-2pt}
+
+\begin{tabularx}{\linewidth}{@{}l r@{}}
+\textbf{EnglishFormatter — Workflow Automation CLI (C++20)} & \hfill \href{https://github.com/Fahad-Ali-Khan-ca/EnglishFormatter}{\faGithub} \\[2pt]
+\multicolumn{2}{@{}X@{}}{Built a structured CLI tool that automates formatting, summarization, and paraphrasing workflows through an external LLM API, with strong validation and reproducible developer workflows.}\\
+\end{tabularx}
+
+\end{document}
