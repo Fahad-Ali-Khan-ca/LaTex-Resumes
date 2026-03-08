@@ -1,6 +1,6 @@
 # Clean LaTeX Resume Template
 
-A minimal, single-page resume template built with **LuaLaTeX**. Designed for software engineers but easily adaptable to any field.
+A minimal, single-page resume template built with **LuaLaTeX**, with an automated **resume tailoring CLI** that customizes your resume for any job description using ATS keyword optimization and LLM-powered rewriting.
 
 ![Preview](preview.png)
 
@@ -12,6 +12,7 @@ A minimal, single-page resume template built with **LuaLaTeX**. Designed for sof
 - Hyperlinked contacts and project references
 - Compact spacing — fits dense content on one page without feeling cramped
 - Built for **LuaLaTeX** with `fontspec` for modern font support
+- **Automated resume tailoring** — CLI tool that rewrites your resume to match any job description
 
 ## Setup
 
@@ -138,14 +139,91 @@ Swap or add icons from the [Font Awesome 5 package](https://ctan.org/pkg/fontawe
 \href{https://yoursite.com}{\faGlobe\ yoursite.com}
 ```
 
+## Resume Tailor CLI
+
+A Python CLI tool that automatically tailors your resume to match a specific job description.
+
+### What it does
+
+1. **Parses your resume** — extracts sections, bullets, and skills from the `.tex` file
+2. **Analyzes the job description** — extracts keywords from text, a file, or a URL
+3. **Identifies keyword gaps** — compares JD keywords against your resume
+4. **Rewrites with LLM** — uses Claude or GPT to rewrite your summary, bullets, and project descriptions to align with the JD (while preserving truthfulness)
+5. **Optimizes skills** — reorders skill categories and injects missing keywords
+6. **Compiles PDF** — runs `lualatex` to produce the final tailored resume
+
+### Quick start
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Copy and configure your API key
+cp .env.example .env
+# Edit .env with your LLM_API_KEY
+
+# Keyword gap analysis only (no API key needed)
+python -m resume_tailor --jd-text "We need a Python developer with AWS experience..." --keywords-only -v
+
+# Full tailoring from a text file
+python -m resume_tailor --jd-file job_description.txt
+
+# Full tailoring from a URL
+python -m resume_tailor --jd-url https://example.com/job-posting
+
+# Output .tex only (skip PDF compilation)
+python -m resume_tailor --jd-file job.txt --no-compile
+```
+
+### CLI options
+
+| Flag | Description |
+|---|---|
+| `--jd-text` | Job description as direct text |
+| `--jd-file` | Path to a `.txt` file with the job description |
+| `--jd-url` | URL of the job posting (scraped automatically) |
+| `--resume` | Path to `.tex` file (auto-detected if only one exists) |
+| `--output-dir` | Output directory (default: `output/`) |
+| `--no-compile` | Skip `lualatex` PDF compilation |
+| `--keywords-only` | Only run keyword gap analysis, no LLM rewriting |
+| `--provider` | LLM provider: `anthropic` or `openai` |
+| `--model` | LLM model name (e.g. `claude-sonnet-4-20250514`, `gpt-4o`) |
+| `-v, --verbose` | Show detailed keyword analysis |
+
+### Configuration
+
+Create a `.env` file (see `.env.example`):
+
+```env
+LLM_PROVIDER=anthropic
+LLM_API_KEY=your-api-key-here
+LLM_MODEL=claude-sonnet-4-20250514
+LUALATEX_CMD=lualatex
+```
+
+---
+
 ## File Structure
 
 ```
 .
-├── resume.tex      # Main template — edit this
-├── resume.pdf      # Compiled preview
-├── preview.png     # Screenshot for the README
-├── .gitignore      # Excludes LaTeX build artifacts
+├── FahadAliKhan_Resume.tex   # Main resume template — edit this
+├── FahadAliKhan_Resume.pdf   # Compiled preview
+├── preview.png               # Screenshot for the README
+├── resume_tailor/             # Automated tailoring CLI tool
+│   ├── cli.py                # CLI entry point
+│   ├── models.py             # Data models
+│   ├── latex_parser.py       # .tex → structured data
+│   ├── latex_generator.py    # Structured data → .tex
+│   ├── job_parser.py         # JD parsing (text/file/URL)
+│   ├── keyword_analyzer.py   # ATS keyword gap analysis
+│   ├── llm_client.py         # Provider-agnostic LLM wrapper
+│   ├── rewriter.py           # LLM-powered rewriting
+│   └── compiler.py           # lualatex PDF compilation
+├── requirements.txt           # Python dependencies
+├── setup.py                   # Package setup
+├── .env.example               # Environment variable template
+├── .gitignore
 ├── LICENSE
 └── README.md
 ```
